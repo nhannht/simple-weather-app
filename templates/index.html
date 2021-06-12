@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href={{url_for('static',filename='style.css')}}>
+</head>
+<body>
+<div>
+    {% with message = get_flashed_messages() %}
+    {% if message %}
+    <div class="alert alert-primary" role="alert">
+    {{message.pop()}}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <form method="post" action="/">
+        <div><label for="input-city"></label><input type="text" id="input-city" name="city-name"></div>
+        <button type="submit" value="Submit" class="submit-button">Add</button>
+    </form>
+    <div class="cards">
+
+        {% for city in cities %}
+        <div class="card">
+            <form method="post" action="/delete/{{city.id}}">
+                <button type="submit" class="delete-button" name="delete-button">Delete</button>
+            </form>
+            <div class="degrees" class="celsius"><p> {{city.degree}} °C <p></p></div>
+            <div class="state">State: {{city.state}} </div>
+            <div class="city" >Name: {{city.city}}</div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="cards">
+    </div>
+</div>
+</body>
+</html>
