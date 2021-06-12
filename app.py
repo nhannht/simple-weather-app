@@ -8,7 +8,6 @@ from flask import request
 from sqlalchemy.exc import IntegrityError
 from flask import flash
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy_utils import database_exists,create_database
 
 
 app = Flask(__name__)
