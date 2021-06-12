@@ -8,7 +8,7 @@ from flask import request
 from sqlalchemy.exc import IntegrityError
 from flask import flash
 from flask_sqlalchemy import SQLAlchemy
-
+from sqlalchemy_utils import database_exists,create_database
 
 
 app = Flask(__name__)
@@ -22,9 +22,8 @@ class City(db.Model):
     degree = db.Column(db.Float, nullable=False)
     state = db.Column(db.Integer, nullable=False)
 
-
+db.drop_all()
 db.create_all()
-
 
 def fetch_from_openweather_and_insert_to_db(city):
     url = f'http://api.openweathermap.org/data/2.5/weather'
